@@ -2,26 +2,26 @@
 
 namespace ANN
 {
-    public class StringNeuron : Neuron<string, int, float?>
+    public class StringNeuron : Neuron<string, int, byte>
     {
-        public override float? GetMemValue(int indexer)
+        public override byte GetMemValue(int indexer)
         {
             if (Memory.Length - 1 < indexer)
             {
                 return 0;
             }
 
-            return (byte) Memory[indexer] / 255;
+            return (byte) Memory[indexer];
         }
 
-        public override float? GetInputValue(int indexer)
+        public override byte GetInputValue(int indexer)
         {
             if (Input.Length - 1 < indexer)
             {
                 return 0;
             }
 
-            return (byte) Input[indexer] / 255;
+            return (byte) Input[indexer];
         }
     }
 }

@@ -7,25 +7,19 @@ using System.Linq;
 
 namespace ANN
 {
-    public class StringTest 
+    public class StringTest
     {
         private static List<StringNeuron> All = new List<StringNeuron>();
 
-        private static string input = "А.bmp";
+        private static string input = @"Losum";
 
         private static void init()
         {
-            //
-            var files = Directory
-                .GetFiles(@".\img")
-                .Where(file => file.EndsWith(".bmp"));
-            foreach (var file in files)
-            {
-                All.Add(new StringNeuron
-                {
-                    Memory = file
-                });
-            }
+            All.Add(new StringNeuron {Memory = "Lorem"});
+            All.Add(new StringNeuron {Memory = "Ipsum"});
+            All.Add(new StringNeuron {Memory = "Dolor"});
+            All.Add(new StringNeuron {Memory = "Obama"});
+            All.Add(new StringNeuron {Memory = "Neuro"});
         }
 
         public static void Run()
@@ -40,33 +34,13 @@ namespace ANN
                 neuron.Input = input;
                 for (var id = 0; id < neuron.Memory.Length; id++)
                 {
-                        var memValue = neuron.GetMemValue(i);
-                        var inputValue = neuron.GetInputValue(i);
+                    var memValue = (float) neuron.GetMemValue(id);
+                    var inputValue = (float) neuron.GetInputValue(id);
 
-                        if (Math.Abs((float)memValue - (float)inputValue) < 200f)
-                        {
-                            if (memValue < 250f)
-                            {
-                                neuron.Weight++;
-                            }
-
-                            if (memValue != 0)
-                            {
-                                if (memValue < 250f)
-                                {
-                                    //inputValue = (float) Math.Round((inputValue + (inputValue + memValue) / 2f) / 2f);
-                                    //neuron.memory.SetPixel(i, y, Color.FromArgb(0, 0, 0));
-                                }
-                            }
-                            else if (inputValue != 0)
-                            {
-                                if (memValue < 250f)
-                                {
-                                    //inputValue = (float) Math.Round((inputValue + (inputValue + memValue) / 2f) / 2f);
-                                    //neuron.memory.SetPixel(i, y, Color.FromArgb(0, 0, 0));
-                                }
-                            }
-                        }
+                    if (Math.Abs(memValue - inputValue) < 3)
+                    {
+                        neuron.Weight++;
+                    }
                 }
 
                 if (neuron.Weight > max)
