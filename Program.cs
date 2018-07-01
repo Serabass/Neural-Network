@@ -84,7 +84,7 @@ namespace ANN
         }
 
         public static void init()
-        {
+        { //
             var files = Directory.GetFiles("img").Where(file => file.EndsWith(".bmp"));
             foreach (var file in files)
             {
